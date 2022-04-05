@@ -1,0 +1,133 @@
+{%  extends 'seller_header.html'  %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="" !important>
+<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3" style="line-height: 0.5!important; ">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 10px;">
+            <div class="card-body p-4">
+              <h2 class="text-uppercase text-center mb-3">Edit Product</h2>
+              {% if msg%}
+              <h4 style="color:black;">{{msg}}</h4>
+              {% endif %}
+              <form action="{% url 'edit_product' pk=product.pk %}"  method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="form-outline mb-4">
+                  <select id="form3Example1cg" class="form-control form-control-lg" name="product_collection"  >
+                    {% if product.product_collection == "men" %}
+                    <option value="men" selected>Men</option>
+                    <option value="women">WoMen</option>
+                    <option value="kids">Kids</option>
+                    {% elif product.product_collection == "women" %}
+                    <option value="men">Men</option>
+                    <option value="women" selected>WoMen</option>
+                    <option value="kids">Kids</option>
+                    {% elif product.product_collection == "kids" %}
+                    <option value="men">Men</option>
+                    <option value="women">WoMen</option>
+                    <option value="kids" selected>Kids</option>
+                    {% else %}
+                    <option >------Product Collection------</option>
+                    <option value="men">Men</option>
+                    <option value="women">WoMen</option>
+                    <option value="kids">Kids</option>
+                    {% endif %}
+                  </select>
+                </div>
+                <div class="form-outline mb-4">
+                  
+                  <select id="form3Example1cg" class="form-control form-control-lg" name="product_category" >
+                   {% if product.product_category == "cloth" %}
+                   <option value="cloth" selected>Cloth</option>
+                   <option value="footwear">Footwear</option>
+                   <option value="watch">Watchs</option>
+                   <option value="accessoies">Accessories</option>
+                   {% elif product.product_category == "footwear" %}
+                   <option value="cloth">Cloth</option>
+                   <option value="footwear" selected>Footwear</option>
+                   <option value="watch">Watchs</option>
+                   <option value="accessoies">Accessories</option>
+                   {% elif product.product_category == "watchs" %}
+                   <option value="cloth">Cloth</option>
+                   <option value="footwear">Footwear</option>
+                   <option value="watch" selected>Watchs</option>
+                   <option value="accessoies">Accessories</option>
+                   {% elif product.product_category == "accessories" %}
+                   <option value="cloth">Cloth</option>
+                   <option value="footwear">Footwear</option>
+                   <option value="watch">Watchs</option>
+                   <option value="accessoies" selected>Accessories</option>
+                   {% else %}
+                   <option >------Product Category-----</option>
+                   <option value="cloth">Cloth</option>
+                   <option value="footwear">Footwear</option>
+                   <option value="watch">Watchs</option>
+                   <option value="accessoies">Accessories</option>
+                   {% endif %}
+                 </select>
+               </div>
+               <div class="form-outline mb-4">
+                
+                <select id="form3Example1cg" class="form-control form-control-lg" name="product_size" >
+                  {% if product.product_size == "s" %}
+                  <option value="s" selected>Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                  <option value="xl">Extra-Large</option>
+                  {% elif product.product_size == "m" %}
+                  <option value="s">Small</option>
+                  <option value="m" selected>Medium</option>
+                  <option value="l">Large</option>
+                  <option value="xl">Extra-Large</option>
+                  {% elif product.product_size == "l" %}
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l" selected>Large</option>
+                  <option value="xl">Extra-Large</option>
+                  {% elif product.product_size == "xl" %}
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                  <option value="xl">Extra-Large</option>
+                  {% else %}
+                  <option >------Product Size-----</option>
+                  <option value="s">Small</option>
+                  <option value="m">Medium</option>
+                  <option value="l">Large</option>
+                  <option value="xl" selected>Extra-Large</option>
+                  {% endif %}
+                </select>
+                
+              </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="form3Example3cg" class="form-control form-control-lg"  name="product_price" placeholder="PRODUCT Price" value="{{product.product_price}}" />
+                
+              </div>
+              
+              <div class="form-outline mb-4">
+                <input type="file" id="form3Example4cg" class="form-control form-control-lg"  name="product_image" />
+                
+              </div>
+              <div class="form-outline mb-4">
+                <image src="{{product.product_image.url}}" style=" width: 200px; height: 299px;" />
+              </div>
+              <div class="form-outline mb-4">
+                <textarea id="form3Example4cdg" class="form-control form-control-lg" name="product_discription" placeholder="ENTER PRODUCT DISCREPTION">{{product.product_discription}}</textarea> 
+                
+              </div>
+              
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body submit_btn">Update Product</button>  
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,104 @@
+{%  extends 'header.html'  %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="{{product.product_image.url}}" >
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2"><a href="" class="h3 text-decoration-none">{{product.product_collection}} - {{product.product_category}}</a></h1>
+                        <p class="h3 py-2">₹{{product.product_price}}</p>
+                        <p class="py-2">
+                        </p>
+                        <h6>Description:</h6>
+                        <p>{{product.product_discription}}</p>    
+                        <div class="row">
+                            <div class="col-auto">
+                                <ul class="list-inline pb-3">
+                                    <li class="list-inline-item">Size :
+                                        <input type="hidden" name="product-size" id="product-size" value="S">
+                                    </li>
+                                    <li class="list-inline-item"><span class="btn btn-success btn-size">{{product.product_size}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            {% if request.session.email%}
+                            {% if cart_flag %}
+                            <div class="col d-grid">
+                                <a href="{% url 'delete_from_cart' pk=product.pk %}" class="btn btn-danger btn-lg">Remove from Cart</a>
+                            </div>
+                            {% else %}
+                            <div class="col d-grid">
+                                <a href="{% url 'add_to_cart' pk=product.pk %}" class="btn btn-success btn-lg">Add To Cart</a>
+                            </div>
+                            {% endif %}
+                            {% if whishlist_flag %}
+                            <div class="col d-grid">
+                                <a href="{% url 'delete_from_whishlist' pk=product.pk %}" class="btn btn-danger btn-lg">Remove from Whishlist</a>
+                            </div>
+                            {% else %}
+                            <div class="col d-grid">
+                                <a href="{% url 'whishlist' pk=product.pk %}" class="btn btn-danger btn-lg">Add To Whishlist</a>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            <div class="col d-grid">
+                                <a href="{% url 'signin'  %}" class="btn btn-success btn-lg">Login</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+<!-- Start Slider Script -->
+<script src="{% static 'assets/js/slick.min.js' %}"></script>
+<script>
+    $('#carousel-related-product').slick({
+        infinite: true,
+        arrows: false,
+        slidesToShow: 4,
+        slidesToScroll: 3,
+        dots: true,
+        responsive: [{
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 3
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 3
+            }
+        }
+        ]
+    });
+</script>
+<!-- End Slider Script -->
+</body>
+</html>
+{% endblock %}

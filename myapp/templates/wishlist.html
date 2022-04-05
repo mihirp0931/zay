@@ -1,0 +1,43 @@
+{%  extends 'header.html'  %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Content -->
+<div class="col-lg-3">  
+    <ul class="list-unstyled templatemo-accordion">     
+    </ul>
+</div>
+<div class="col-lg-9">
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-inline shop-top-menu pb-3 pt-1">
+
+            </ul>
+        </div>
+        <div class="">
+            <div class="d-flex">  
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% if whishlists %}
+        {% for i in whishlists %}
+        <div class="col-md-4">
+            <div class="card mb-4 product-wap rounded-0">
+                <div class="card rounded-0">
+                    <a href="{% url 'shop_single' pk=i.product.pk %}"><img class="card-img rounded-0 img-fluid" src="{{i.product.product_image.url}}" style="width:340px;height: 340px;"></a>
+                </div>
+            </div>
+        </div>{% endfor %}
+        {% else %}
+        <h2>No Product in Wishlist</h2>
+        {% endif %}
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+{% endblock %}

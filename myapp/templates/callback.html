@@ -1,0 +1,29 @@
+{%  extends 'header.html'  %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<head>
+    <title>Callback</title>
+</head>
+<body >
+    <h2 class="text-uppercase">Callback Messsage: </h2>                    <br>
+    <h3 class="text-decoration-none"> Checksum Verification: {{ message }} </h3> <br>
+    MID: {{ MID }}                                  <br>
+    TXNID: {{ TXNID }}                              <br>
+    ORDERID: {{ ORDERID }}                          <br>
+    BANKTXNID: {{ BANKTXNID }}                      <br>
+    TXNAMOUNT: {{ TXNAMOUNT }}                      <br>
+    CURRENCY: {{ CURRENCY }}                        <br>
+    <h3 class="text-uppercase"> STATUS: {{ STATUS }} </h3>                 <br>
+    RESPCODE: {{ RESPCODE }}                        <br>
+    RESPMSG: {{ RESPMSG }}                          <br>
+    TXNDATE: {{ TXNDATE }}                          <br>
+    GATEWAYNAME: {{ GATEWAYNAME }}                  <br>
+    BANKNAME: {{ BANKNAME }}                        <br>
+    BIN_NAME: {{ BIN_NAME }}                        <br>
+    PAYMENTMODE: {{ PAYMENTMODE }}                  <br>
+    CHECKSUMHASH: {{ CHECKSUMHASH }}                <br><br><br><br><br><br>
+    <a href="{% url 'index' %}"><h1> Back to Home</h1></a><br><br><br>
+</body>
+</html>
+{% endblock %}

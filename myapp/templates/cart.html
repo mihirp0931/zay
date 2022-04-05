@@ -1,0 +1,98 @@
+{%  extends 'header.html'  %}
+{% load static %}
+{% block content %}
+<div class="container mb-4">
+  {% if carts %}
+  <div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+          
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"> </th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Available</th>
+                        <th scope="col" class="text-center">Price</th>
+                        <th scope="col" class="text-center">Quantity</th>
+                        <th scope="col" class="text-right">Total Price</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in carts%}
+                    <tr>
+                        <td><img src={{i.product.product_image.url}} width="100px" height="100px" /> </td>
+                        <td>{{i.product.product_collection}} - {{i.product.product_category}}</td>
+                        <td>In stock</td>
+                        <td class="text-right">{{i.product.product_price}}  ₹</td>
+                        <td>
+                            <form method="post" action="{% url 'change_qty' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="cid" value="{{i.pk}}">
+                                <input class="" type="number" value="{{i.product_qty}}" aria-label="Example text with button addon " aria-discribedby="button-addon1" name="product_qty" onchange="this.form.submit();" />
+                            </form>
+                        </td>
+                        <td class="text-right">{{i.total_price}}  ₹</td>
+                        <td class="text-right">
+                            <a class="btn btn-sm btn-danger" href="{% url 'delete_from_cart' pk=i.product.pk %}" >
+                                <i class="fa fa-trash"></i> 
+                            </a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Sub-Total</td>
+                        <td class="text-right">{{net_price}} ₹</td>
+                    </tr>
+                        <!-- <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Shipping</td>
+                            <td class="text-right">{{shipping_price}} ₹</td>
+                        </tr> -->
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td class="text-right"><strong>{{net_price}} ₹</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <a href="{% url 'shop' %}"><button class="btn btn-block btn-light" href="">Continue Shopping</button></a>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <form action="{% url 'pay' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="amount" value="{{net_price}}">
+                        <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+        
+        {% else %}
+        <br><br><br>
+        <h2 class="">No Product in Cart</h2>
+        <br><br><br>
+        {% endif %}
+        
+    </div>
+    
+</div>
+{% endblock %}
